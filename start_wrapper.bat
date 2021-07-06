@@ -647,29 +647,16 @@ title Wrapper: Offline v!WRAPPER_VER!b!WRAPPER_BLD! [Loading...]
 :: Close existing node apps
 :: Hopefully fixes EADDRINUSE errors??
 if !VERBOSEWRAPPER!==y (
-	if !CEPSTRAL!==n (
-		echo Closing any existing node and/or PHP apps and batch processes...
-		for %%i in (npm start,npm,http-server,HTTP-SERVER HASN'T STARTED,NODE.JS HASN'T STARTED YET,VFProxy PHP Launcher for Wrapper: Offline) do (
-			if !DRYRUN!==n ( TASKKILL /FI "WINDOWTITLE eq %%i" >nul 2>&1 )
-		)
-		if !DRYRUN!==n ( TASKKILL /IM node.exe /F >nul 2>&1 )
-		if !DRYRUN!==n ( TASKKILL /IM php.exe /F >nul 2>&1 )
-		echo:
-	) else (
-		echo Closing any existing node apps and batch processes...
-		for %%i in (npm start,npm,http-server,HTTP-SERVER HASN'T STARTED,NODE.JS HASN'T STARTED YET) do (
-			if !DRYRUN!==n ( TASKKILL /FI "WINDOWTITLE eq %%i" >nul 2>&1 )
-		)
-		if !DRYRUN!==n ( TASKKILL /IM node.exe /F >nul 2>&1 )
-		echo:
+	echo Closing any existing node and/or PHP apps and batch processes...
+	for %%i in (npm start,npm,http-server,HTTP-SERVER HASN'T STARTED,NODE.JS HASN'T STARTED YET,VFProxy PHP Launcher for Wrapper: Offline) do (
+		if !DRYRUN!==n ( TASKKILL /FI "WINDOWTITLE eq %%i" >nul 2>&1 )
 	)
+	if !DRYRUN!==n ( TASKKILL /IM node.exe /F >nul 2>&1 )
+	if !DRYRUN!==n ( TASKKILL /IM php.exe /F >nul 2>&1 )
+	echo:
 ) else (
-	if !CEPSTRAL!==n (
-		if !DRYRUN!==n ( TASKKILL /IM node.exe /F >nul 2>&1 )
-		if !DRYRUN!==n ( TASKKILL /IM php.exe /F >nul 2>&1 )
-	) else (
-		if !DRYRUN!==n ( TASKKILL /IM node.exe /F >nul 2>&1 )
-	)
+	if !DRYRUN!==n ( TASKKILL /IM node.exe /F >nul 2>&1 )
+	if !DRYRUN!==n ( TASKKILL /IM php.exe /F >nul 2>&1 )
 )
 
 :: Start Node.js, http-server and PHP webserver for VFProxy
@@ -682,18 +669,11 @@ pushd utilities
 if !VERBOSEWRAPPER!==y (
 	if !DRYRUN!==n ( start /MIN open_http-server.bat )
 	if !DRYRUN!==n ( start /MIN open_nodejs.bat )
-	if !DRYRUN!==n ( 
-		if !CEPSTRAL!==n ( 
-			start /MIN open_vfproxy_php.bat
-		)
-	)
+	if !DRYRUN!==n ( start /MIN open_vfproxy_php.bat )
 ) else (
 	if !DRYRUN!==n ( start SilentCMD open_http-server.bat )
 	if !DRYRUN!==n ( start SilentCMD open_nodejs.bat )
-	if !DRYRUN!==n ( 
-		if !CEPSTRAL!==n (
-			start SilentCMD open_vfproxy_php.bat
-		)
+	if !DRYRUN!==n ( start SilentCMD open_vfproxy_php.bat )
 	)
 )
 popd
